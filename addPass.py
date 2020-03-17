@@ -7,13 +7,19 @@ Created on Mon Mar 16 16:34:17 2020
 
 import glob
 import os
-files = glob.glob("config/*.ovpn")
+files = glob.glob("C:/Program Files/OpenVPN/config/*.ovpn")
 for x in range(0,len(files)):
     f = open(files[x],'r')
     t = open("temp.txt",'w')
+    flag = 0
+    for line in f:
+        if "" in line:
+            flag = 1
+            break
     for line in f:
         if "auth-user-pass" in line:
             t.write("auth-user-pass pass.txt")
+            t.write("")
         else:
             t.write(line)
     f.close()
